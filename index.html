@@ -35,7 +35,8 @@
     let client, session;
 
     async function startWalletConnect() {
-      client = await WalletConnectModal.WalletConnectModalSignClient.init({
+      client = await SignClient.init({
+
         projectId,
         metadata: providerMetadata
       });
